@@ -1,7 +1,6 @@
 package com.example.vaadin.dao;
 
 import com.example.vaadin.model.User;
-import jakarta.annotation.PostConstruct;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

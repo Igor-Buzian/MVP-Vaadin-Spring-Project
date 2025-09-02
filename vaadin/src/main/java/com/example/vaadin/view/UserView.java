@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface UserView {
     void showUsers(List<User> users, TextArea output);
+
     void showMessage(String message);
 }

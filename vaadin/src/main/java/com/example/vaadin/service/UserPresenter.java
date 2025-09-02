@@ -4,13 +4,9 @@ import com.example.vaadin.dao.UserDao;
 import com.example.vaadin.model.User;
 import com.example.vaadin.view.UserView;
 import com.vaadin.flow.component.textfield.TextArea;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,8 +61,8 @@ public class UserPresenter {
         view.showUsers(users, output);
     }
 
-    public User showUserById(Long id){
-       Optional<User> user = userDao.getById(id);
-       return user.get();
+    public User showUserById(Long id) {
+        Optional<User> user = userDao.getById(id);
+        return user.get();
     }
 }
