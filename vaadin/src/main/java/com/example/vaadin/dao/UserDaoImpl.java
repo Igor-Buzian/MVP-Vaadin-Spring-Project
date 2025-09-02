@@ -17,19 +17,13 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @PostConstruct
-    public void init() {
-        System.out.println("UserDaoImpl bean created!");
-    }
     @Override
-    @Transactional
-    public Optional<User> getById(long id) {
+    public Optional<User> getById(Long id) {
         System.out.println("UserDaoImpl getById");
         return Optional.ofNullable(sessionFactory.getCurrentSession().find(User.class, id));
     }
 
     @Override
-    @Transactional
     public void save(User user) {
         System.out.println("UserDaoImpl save");
         sessionFactory.getCurrentSession().persist(user);
@@ -38,7 +32,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void update(User user) {
         System.out.println("UserDaoImpl update");
         sessionFactory.getCurrentSession().merge(user);
@@ -47,7 +40,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void delete(User user) {
         System.out.println("UserDaoImpl delete");
         sessionFactory.getCurrentSession().remove(user);

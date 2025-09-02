@@ -4,35 +4,26 @@ import com.example.vaadin.dao.UserDao;
 import com.example.vaadin.model.User;
 import com.example.vaadin.view.UserView;
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class UserPresenter {
 
-    @Autowired
-    private UserDao userDao;
+    private final UserDao userDao;
 
     private UserView view;
-
-    public UserPresenter() {
-    }
 
     public void setView(UserView view) {
         this.view = view;
     }
-    @PostConstruct
-    public void checkDao() {
-        System.out.println("Injected userDao implementation: " + userDao.getClass().getName());
-    }
 
-
-    @Transactional
     public void addUser(User user) {
         if (user.getName() == null || user.getName().trim().isEmpty()) {
             view.showMessage("Name cannot be empty");
@@ -42,7 +33,7 @@ public class UserPresenter {
         view.showMessage("User saved");
     }
 
-    @Transactional
+
     public void deleteUser(long id) {
         Optional<User> user = userDao.getById(id);
         if (user.isPresent()) {
@@ -53,7 +44,7 @@ public class UserPresenter {
         }
     }
 
-    @Transactional
+
     public void updateUser(User user) {
         Optional<User> currentUser = userDao.getById(user.getId());
         if (currentUser.isPresent()) {
@@ -70,5 +61,10 @@ public class UserPresenter {
     public void showAllUsers() {
         List<User> users = userDao.getAll();
         view.showUsers(users);
+    }
+
+    public User showUserById(Long id){
+       Optional<User> user = userDao.getById(id);
+       return user.get();
     }
 }

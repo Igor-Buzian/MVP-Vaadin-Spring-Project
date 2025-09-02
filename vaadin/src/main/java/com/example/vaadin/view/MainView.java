@@ -1,6 +1,5 @@
 package com.example.vaadin.view;
 
-import com.example.vaadin.dao.UserDao;
 import com.example.vaadin.model.User;
 import com.example.vaadin.service.UserPresenter;
 import com.vaadin.flow.component.Unit;
@@ -14,12 +13,10 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.data.converter.StringToLongConverter;
 import com.vaadin.flow.router.Route;
 import org.jetbrains.annotations.NotNull;
 import com.vaadin.flow.data.binder.Binder;
-
-import java.util.Optional;
+import org.jetbrains.annotations.Nullable;
 
 
 @Route("")
@@ -39,6 +36,7 @@ public class MainView extends VerticalLayout {
 
     public MainView(UserPresenter userPresenter) {
         userPresenter.setView(userConsoleView);
+
         setupUI();
         setupEventListeners(userPresenter);
     }
@@ -53,9 +51,10 @@ public class MainView extends VerticalLayout {
         buttonsVisual();
 
         VerticalLayout formWrapper = userForm();
-        HorizontalLayout buttonsWrapper = buttonsForm();
         VerticalLayout outputWrapper = outputForm();
         HorizontalLayout mainLayout = getMainLayout(formWrapper, outputWrapper);
+
+        HorizontalLayout buttonsWrapper = buttonsForm();
 
         mainVisualInterfaces(header, mainLayout, buttonsWrapper);
     }
@@ -134,20 +133,25 @@ public class MainView extends VerticalLayout {
     }
 
     private void idLogic() {
-       /* id.setPlaceholder("Enter your user id (not required)");
+       id.setPlaceholder("Enter your user id (not required)");
         id.setWidthFull();
         id.setHeight(60, Unit.PIXELS);
 
         binder.forField(id)
-                .asRequired("ID can't be empty!")
-                .withConverter(new StringToLongConverter("id can be number"))
-                .withValidator(id -> {
-                    if (id == null) {
-                        return true;
-                    }
-                    return id >= 1;
-                }, "id ought to be more than 0")
-                .bind(User::getId, User::setId);*/
+                .withConverter(
+                        value -> {
+                            if (value == null || value.trim().isEmpty()) {
+                                return null; // Для addUser это допустимо
+                            }
+                            try {
+                                return Long.parseLong(value.trim());
+                            } catch (NumberFormatException e) {
+                                throw new RuntimeException("ID must be a number");
+                            }
+                        },
+                        object -> object == null ? "" : object.toString()
+                )
+                .bind(User::getId, User::setId);
     }
 
     private void buttonsVisual() {
@@ -199,13 +203,13 @@ public class MainView extends VerticalLayout {
             User user = new User();
             binder.writeBeanIfValid(user);
             userPresenter.addUser(user);
-            output.setValue("User added:\nName: " + name.getValue() + "\nEmail: " + email.getValue());
+            output.setValue("User: \nName: " + name.getValue() + "\nEmail: " + email.getValue());
             clearFields();
         }
-
     }
 
     private void updateUser(UserPresenter userPresenter) {
+        if (emptyUserId()) return;
         if (validateFields()) {
             User user = new User();
             binder.writeBeanIfValid(user);
@@ -216,21 +220,37 @@ public class MainView extends VerticalLayout {
     }
 
     private void deleteUser(UserPresenter userPresenter) {
-        if (emptyIdWhenWeTryToDeleteUser()) return;
-        User user = new User();
-        binder.writeBeanIfValid(user);
-        userPresenter.deleteUser(user.getId());
+        if (emptyUserId()) return;
+        Long userId = getUserId();
+        userPresenter.deleteUser(userId);
         output.setValue("User deleted:\nName: " + name.getValue() + "\nEmail: " + email.getValue());
         clearFields();
     }
 
-    private boolean emptyIdWhenWeTryToDeleteUser() {
+    @Nullable
+    private Long getUserId() {
+        Long userId;
+        try {
+            userId = Long.parseLong(id.getValue());
+            if (userId < 1) {
+                Notification.show("ID must be a positive number for deletion.", 3000, Notification.Position.MIDDLE);
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            Notification.show("ID must be a valid number.", 3000, Notification.Position.MIDDLE);
+            return null;
+        }
+        return userId;
+    }
+
+    private boolean emptyUserId() {
         if (id.isEmpty()) {
-            Notification.show("Please enter user details to delete", 3000, Notification.Position.MIDDLE);
+            Notification.show("Please enter user details", 3000, Notification.Position.MIDDLE);
             return true;
         }
         return false;
     }
+
 
     private boolean validateFields() {
         if (name.isEmpty() || email.isEmpty()) {
@@ -243,5 +263,15 @@ public class MainView extends VerticalLayout {
     private void clearFields() {
         name.clear();
         email.clear();
+        id.clear();
+
+        name.setInvalid(false);
+        name.setErrorMessage(null);
+
+        email.setInvalid(false);
+        email.setErrorMessage(null);
+
+        id.setInvalid(false);
+        id.setErrorMessage(null);
     }
 }
