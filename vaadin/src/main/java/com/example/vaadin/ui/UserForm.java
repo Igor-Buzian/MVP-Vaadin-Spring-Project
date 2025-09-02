@@ -1,7 +1,6 @@
-package com.example.vaadin.view;
+package com.example.vaadin.ui;
 
 import com.example.vaadin.model.User;
-import com.example.vaadin.service.UserPresenter;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -9,41 +8,29 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.router.Route;
-import org.jetbrains.annotations.NotNull;
 import com.vaadin.flow.data.binder.Binder;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Component;
 
-
-@Route("")
-public class MainView extends VerticalLayout {
-
+@Component
+public class UserForm extends VerticalLayout {
     TextArea id = new TextArea("User id");
     TextArea name = new TextArea("Name");
     TextArea email = new TextArea("Email");
     TextArea output = new TextArea("Output");
 
-    private Button addButton = new Button("Add", new Icon(VaadinIcon.PLUS));
-    private Button updateButton = new Button("Update", new Icon(VaadinIcon.EDIT));
-    private Button deleteButton = new Button("Delete", new Icon(VaadinIcon.TRASH));
-    private Button findUser = new Button("Find user", new Icon(VaadinIcon.USER));
-    private Button findAllUsers = new Button("Find Users", new Icon(VaadinIcon.USERS));
+    Button addButton = new Button("Add", new Icon(VaadinIcon.PLUS));
+    Button updateButton = new Button("Update", new Icon(VaadinIcon.EDIT));
+    Button deleteButton = new Button("Delete", new Icon(VaadinIcon.TRASH));
+    Button findUser = new Button("Find user", new Icon(VaadinIcon.USER));
+    Button findAllUsers = new Button("Find Users", new Icon(VaadinIcon.USERS));
 
-    private Binder<User> binder = new Binder<>(User.class);
-    private UserPopupView userConsoleView = new UserPopupView();
+    Binder<User> binder = new Binder<>(User.class);
 
-    public MainView(UserPresenter userPresenter) {
-        userPresenter.setView(userConsoleView);
-
-        setupUI();
-        setupEventListeners(userPresenter);
-    }
-
-    private void setupUI() {
+    public void setupUI() {
         H3 header = headerInterface();
 
         idLogic();
@@ -72,7 +59,7 @@ public class MainView extends VerticalLayout {
         return buttonsWrapper;
     }
 
-    private void mainVisualInterfaces(H3 header, HorizontalLayout mainLayout, HorizontalLayout managementButtonsLayout,  HorizontalLayout searchButtonsLayout) {
+    private void mainVisualInterfaces(H3 header, HorizontalLayout mainLayout, HorizontalLayout managementButtonsLayout, HorizontalLayout searchButtonsLayout) {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
 
@@ -209,101 +196,5 @@ public class MainView extends VerticalLayout {
                 .set("margin-bottom", "30px")
                 .set("color", "#333");
         return header;
-    }
-
-    private void setupEventListeners(UserPresenter userPresenter) {
-        addButton.addClickListener(e -> addUser(userPresenter));
-        updateButton.addClickListener(e -> updateUser(userPresenter));
-        deleteButton.addClickListener(e -> deleteUser(userPresenter));
-        findUser.addClickListener(e ->findUser(userPresenter));
-        findAllUsers.addClickListener(e ->findAllUsers(userPresenter));
-    }
-
-    private void findAllUsers(UserPresenter userPresenter) {
-        userPresenter.showAllUsers(output);
-    }
-
-    private void findUser(UserPresenter userPresenter) {
-        if(emptyUserId())return;
-        Long userId = getUserId();
-        User user = userPresenter.showUserById(userId);
-        output.setValue("User: \nName: " + user.getName() + "\nEmail: " + user.getEmail());
-    }
-
-    private void addUser(UserPresenter userPresenter) {
-        if (validateFields()) {
-            User user = new User();
-            binder.writeBeanIfValid(user);
-            userPresenter.addUser(user);
-            output.setValue("User: \nName: " + name.getValue() + "\nEmail: " + email.getValue());
-            clearFields();
-        }
-    }
-
-    private void updateUser(UserPresenter userPresenter) {
-        if (emptyUserId()) return;
-        if (validateFields()) {
-            User user = new User();
-            binder.writeBeanIfValid(user);
-            userPresenter.updateUser(user);
-            output.setValue("User updated:\nName: " + name.getValue() + "\nEmail: " + email.getValue());
-            clearFields();
-        }
-    }
-
-    private void deleteUser(UserPresenter userPresenter) {
-        if (emptyUserId()) return;
-        Long userId = getUserId();
-        userPresenter.deleteUser(userId);
-        output.setValue("User deleted:\nName: " + name.getValue() + "\nEmail: " + email.getValue());
-        clearFields();
-    }
-
-    @Nullable
-    private Long getUserId() {
-        Long userId;
-        try {
-            userId = Long.parseLong(id.getValue());
-            if (userId < 1) {
-                Notification.show("ID must be a positive number for deletion.", 3000, Notification.Position.MIDDLE);
-                return null;
-            }
-        } catch (NumberFormatException e) {
-            Notification.show("ID must be a valid number.", 3000, Notification.Position.MIDDLE);
-            return null;
-        }
-        return userId;
-    }
-
-    private boolean emptyUserId() {
-        if (id.isEmpty()) {
-            Notification.show("Please enter user details", 3000, Notification.Position.MIDDLE);
-            return true;
-        }
-        return false;
-    }
-
-
-    private boolean validateFields() {
-        if (name.isEmpty() || email.isEmpty()) {
-            Notification.show("Please fill in all fields", 3000, Notification.Position.MIDDLE);
-            return false;
-        }
-        return true;
-    }
-
-    private void clearFields() {
-        name.clear();
-        email.clear();
-        id.clear();
-
-        name.setInvalid(false);
-        name.setErrorMessage(null);
-
-        email.setInvalid(false);
-        email.setErrorMessage(null);
-
-        id.setInvalid(false);
-        id.setErrorMessage(null);
     }
 }

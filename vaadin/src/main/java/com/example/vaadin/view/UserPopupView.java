@@ -22,12 +22,12 @@ public class UserPopupView implements UserView {
                     .append(",\n Email: ").append(user.getEmail())
                     .append("\n");
         }
-        Notification.show("All Users");
+        Notification.show("All Users", 3000, Notification.Position.BOTTOM_CENTER);
         output.setValue(builder.toString());
     }
 
     @Override
     public void showMessage(String message) {
-        Notification.show(message, 3000, Notification.Position.MIDDLE);
+        Notification.show(message, 3000, Notification.Position.BOTTOM_CENTER);
     }
 }
