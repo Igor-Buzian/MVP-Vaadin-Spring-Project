@@ -2,23 +2,29 @@ package com.example.vaadin.view;
 
 import com.example.vaadin.model.User;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.textfield.TextArea;
 
 import java.util.List;
 
 public class UserPopupView implements UserView {
 
     @Override
-    public void showUsers(List<User> users) {
+    public void showUsers(List<User> users, TextArea output) {
+        if (users == null || users.isEmpty()) {
+            output.setValue("No users found.");
+            return;
+        }
+
         StringBuilder builder = new StringBuilder("Users:\n");
         for (User user : users) {
             builder.append("ID: ").append(user.getId())
-                    .append(", Name: ").append(user.getName())
-                    .append(", Email: ").append(user.getEmail()).append("\n");
+                    .append(",\n Name: ").append(user.getName())
+                    .append(",\n Email: ").append(user.getEmail())
+                    .append("\n");
         }
-
-        Notification.show(builder.toString(), 5000, Notification.Position.MIDDLE);
+        Notification.show("All Users");
+        output.setValue(builder.toString());
     }
-
 
     @Override
     public void showMessage(String message) {

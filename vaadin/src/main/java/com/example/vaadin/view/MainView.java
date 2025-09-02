@@ -30,6 +30,8 @@ public class MainView extends VerticalLayout {
     private Button addButton = new Button("Add", new Icon(VaadinIcon.PLUS));
     private Button updateButton = new Button("Update", new Icon(VaadinIcon.EDIT));
     private Button deleteButton = new Button("Delete", new Icon(VaadinIcon.TRASH));
+    private Button findUser = new Button("Find user", new Icon(VaadinIcon.USER));
+    private Button findAllUsers = new Button("Find Users", new Icon(VaadinIcon.USERS));
 
     private Binder<User> binder = new Binder<>(User.class);
     private UserPopupView userConsoleView = new UserPopupView();
@@ -54,19 +56,30 @@ public class MainView extends VerticalLayout {
         VerticalLayout outputWrapper = outputForm();
         HorizontalLayout mainLayout = getMainLayout(formWrapper, outputWrapper);
 
-        HorizontalLayout buttonsWrapper = buttonsForm();
+        HorizontalLayout managementButtonsLayout = managementButtonsForm();
+        HorizontalLayout searchButtonsLayout = searchButtons();
 
-        mainVisualInterfaces(header, mainLayout, buttonsWrapper);
+        mainVisualInterfaces(header, mainLayout, managementButtonsLayout, searchButtonsLayout);
     }
 
-    private void mainVisualInterfaces(H3 header, HorizontalLayout mainLayout, HorizontalLayout buttonsWrapper) {
+    private HorizontalLayout searchButtons() {
+        HorizontalLayout buttonsWrapper = new HorizontalLayout(findUser, findAllUsers);
+        buttonsWrapper.setWidth("300px");
+        buttonsWrapper.setPadding(true);
+        buttonsWrapper.setSpacing(true);
+        buttonsWrapper.setAlignItems(Alignment.CENTER);
+        buttonsWrapper.setJustifyContentMode(JustifyContentMode.CENTER);
+        return buttonsWrapper;
+    }
+
+    private void mainVisualInterfaces(H3 header, HorizontalLayout mainLayout, HorizontalLayout managementButtonsLayout,  HorizontalLayout searchButtonsLayout) {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
 
         getStyle().set("background-color", "#e9ecef");
         getStyle().set("padding", "40px");
 
-        add(header, mainLayout, buttonsWrapper);
+        add(header, mainLayout, managementButtonsLayout, searchButtonsLayout);
     }
 
     @NotNull
@@ -87,7 +100,7 @@ public class MainView extends VerticalLayout {
     }
 
     @NotNull
-    private HorizontalLayout buttonsForm() {
+    private HorizontalLayout managementButtonsForm() {
         HorizontalLayout buttonsWrapper = new HorizontalLayout(addButton, updateButton, deleteButton);
         buttonsWrapper.setWidth("300px");
         buttonsWrapper.setPadding(true);
@@ -133,7 +146,7 @@ public class MainView extends VerticalLayout {
     }
 
     private void idLogic() {
-       id.setPlaceholder("Enter your user id (not required)");
+        id.setPlaceholder("Enter your user id (not required)");
         id.setWidthFull();
         id.setHeight(60, Unit.PIXELS);
 
@@ -158,20 +171,26 @@ public class MainView extends VerticalLayout {
         addButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
         updateButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_CONTRAST);
         deleteButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        findUser.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_TERTIARY);
+        findAllUsers.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_TERTIARY);
 
         addButton.setWidthFull();
         updateButton.setWidthFull();
         deleteButton.setWidthFull();
+        findUser.setWidthFull();
+        findAllUsers.setWidthFull();
 
-        addButton.setHeight(45, Unit.PIXELS);
-        updateButton.setHeight(45, Unit.PIXELS);
-        deleteButton.setHeight(45, Unit.PIXELS);
+        addButton.setHeight(55, Unit.PIXELS);
+        updateButton.setHeight(55, Unit.PIXELS);
+        deleteButton.setHeight(55, Unit.PIXELS);
+        findUser.setHeight(55, Unit.PIXELS);
+        findAllUsers.setHeight(55, Unit.PIXELS);
     }
 
     private void outputInfo() {
         output.setReadOnly(true);
         output.setWidthFull();
-        output.setHeight(120, Unit.PIXELS);
+        output.setHeight(220, Unit.PIXELS);
         output.setValue("User info will appear here...");
         output.getStyle()
                 .set("border", "2px solid #4CAF50")
@@ -196,6 +215,19 @@ public class MainView extends VerticalLayout {
         addButton.addClickListener(e -> addUser(userPresenter));
         updateButton.addClickListener(e -> updateUser(userPresenter));
         deleteButton.addClickListener(e -> deleteUser(userPresenter));
+        findUser.addClickListener(e ->findUser(userPresenter));
+        findAllUsers.addClickListener(e ->findAllUsers(userPresenter));
+    }
+
+    private void findAllUsers(UserPresenter userPresenter) {
+        userPresenter.showAllUsers(output);
+    }
+
+    private void findUser(UserPresenter userPresenter) {
+        if(emptyUserId())return;
+        Long userId = getUserId();
+        User user = userPresenter.showUserById(userId);
+        output.setValue("User: \nName: " + user.getName() + "\nEmail: " + user.getEmail());
     }
 
     private void addUser(UserPresenter userPresenter) {
