@@ -177,7 +177,7 @@ public class UserForm extends VerticalLayout {
     private void outputInfo() {
         output.setReadOnly(true);
         output.setWidthFull();
-        output.setHeight(220, Unit.PIXELS);
+        output.setHeight(230, Unit.PIXELS);
         output.setValue("User info will appear here...");
         output.getStyle()
                 .set("border", "2px solid #4CAF50")

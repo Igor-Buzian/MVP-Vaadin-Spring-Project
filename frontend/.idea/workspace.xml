@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5f9a10eb-d514-48d9-afc2-74d53276a859" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../backend/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../batch/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../core/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../shared/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/.idea/dbnavigator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/src/main/java/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/src/main/java/aspect/LoggingAspect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/src/main/java/dao/UserDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/src/main/java/dao/UserDaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/src/main/java/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/src/main/java/service/UserPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/src/main/java/view/MainView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/src/main/java/view/UserConsoleView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/src/main/java/view/UserView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spring/src/main/resources/applicationContext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vaadin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../vaadin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vaadin/src/main/java/com/example/vaadin/dao/UserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../vaadin/src/main/java/com/example/vaadin/dao/UserDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vaadin/src/main/java/com/example/vaadin/ui/UserForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/../vaadin/src/main/java/com/example/vaadin/ui/UserForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vaadin/src/test/java/com/example/vaadin/VaadinApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../vaadin/src/test/java/com/example/vaadin/VaadinApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="32SnFGiZtZJ8m0h1bYu0ZlM6xmo" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/crme276/IdeaProjects/MVP-Vaadin-Spring-Project/frontend",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5f9a10eb-d514-48d9-afc2-74d53276a859" name="Changes" comment="" />
+      <created>1757422736086</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1757422736086</updated>
+    </task>
+    <servers />
+  </component>
+</project>
