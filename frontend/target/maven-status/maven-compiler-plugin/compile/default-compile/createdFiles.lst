@@ -1,0 +1,5 @@
+com\example\frontend\ui\UserForm.class
+com\example\frontend\ui\HelloWorldController.class
+com\example\frontend\ui\UserActionsHandler.class
+com\example\frontend\ui\MainView.class
+com\example\frontend\view\UserPopupView.class
