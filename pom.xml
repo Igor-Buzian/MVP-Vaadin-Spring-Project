@@ -27,9 +27,6 @@
         <!-- Важное: версии Spring-фреймворка под Spring Boot 3.5.5 -->
         <spring.orm.version>6.1.6</spring.orm.version>
         <spring-tx>6.1.6</spring-tx>
-
-        <!-- Используй версии из Spring Boot BOM, но если надо, то укажи так -->
-        <spring-boot-starter-data-jpa.version>3.0.7</spring-boot-starter-data-jpa.version> <!-- Последняя 3.x -->
     </properties>
 
 
@@ -86,7 +83,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
-                <version>${spring-boot-starter-data-jpa.version}</version>
+                <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.postgresql</groupId>
@@ -128,7 +125,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-spring-boot-starter</artifactId>
-                <version>${vaadin-spring-boot-starter}</version>
+                <version>${vaadin.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
