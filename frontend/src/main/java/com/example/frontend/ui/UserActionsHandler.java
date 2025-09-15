@@ -1,122 +1,116 @@
 package com.example.frontend.ui;
 
-
-
 import com.example.core.entity.User;
-import com.vaadin.flow.component.notification.Notification;
-import jakarta.annotation.Nullable;
-import org.springframework.stereotype.Service;
-import com.example.backend.service.UserPresenter;
 import com.example.frontend.view.UserPopupView;
+import com.example.frontend.ui.UserForm;
+import com.vaadin.flow.component.notification.Notification;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.http.ResponseEntity;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class UserActionsHandler {
-    private UserPopupView userConsoleView = new UserPopupView();
-    private UserPresenter userPresenter;
-    private final UserForm form;
 
-    public UserActionsHandler(UserPresenter userPresenter, UserForm form) {
-        userPresenter.setView(userConsoleView);
-        this.userPresenter = userPresenter;
+    private final UserPopupView userConsoleView = new UserPopupView();
+    private final UserForm form;
+    private final RestTemplate restTemplate = new RestTemplate();
+
+    @Value("${users.path}")
+    private String BASE_URL;
+
+    public UserActionsHandler(UserForm form) {
         this.form = form;
     }
 
     public void setupEventListeners() {
-        form.addButton.addClickListener(e -> addUser(userPresenter));
-        form.updateButton.addClickListener(e -> updateUser(userPresenter));
-        form.deleteButton.addClickListener(e -> deleteUser(userPresenter));
-        form.findUser.addClickListener(e -> findUser(userPresenter));
-        form.findAllUsers.addClickListener(e -> findAllUsers(userPresenter));
+        form.addButton.addClickListener(e -> addUser());
+        form.updateButton.addClickListener(e -> updateUser());
+        form.deleteButton.addClickListener(e -> deleteUser());
+        form.findUser.addClickListener(e -> findUser());
+        form.findAllUsers.addClickListener(e -> findAllUsers());
     }
 
-    private void findAllUsers(UserPresenter userPresenter) {
-        userPresenter.showAllUsers(form.output);
+    private void findAllUsers() {
+        ResponseEntity<User[]> response = restTemplate.getForEntity(BASE_URL, User[].class);
+        List<User> users = Arrays.asList(response.getBody());
+        userConsoleView.showUsers(users, form.output);
     }
 
-    private void findUser(UserPresenter userPresenter) {
-        if (emptyUserId()) return;
+    private void findUser() {
         Long userId = getUserId();
-        User user = userPresenter.showUserById(userId);
-        outputSetValue(user);
-    }
+        if (userId == null) return;
 
-    private void outputSetValue(User user) {
-        form.output.setValue("User: \nName: " + user.getName() + "\nEmail: " + user.getEmail());
-    }
-
-    private void addUser(UserPresenter userPresenter) {
-        if (validateFields()) {
-            User user = new User();
-            form.binder.writeBeanIfValid(user);
-            userPresenter.addUser(user);
-            outputSetValue(user);
-            clearFields();
+        User user = restTemplate.getForObject(BASE_URL + "/" + userId, User.class);
+        if (user != null) {
+            userConsoleView.showUsers(Arrays.asList(user), form.output);
+        } else {
+            form.output.setValue("User not found.");
         }
     }
 
-    private void updateUser(UserPresenter userPresenter) {
-        if (emptyUserId()) return;
-        if (validateFields()) {
-            User user = new User();
-            form.binder.writeBeanIfValid(user);
-            userPresenter.updateUser(user);
-            outputSetValue(user);
-            clearFields();
-        }
-    }
+    private void addUser() {
+        if (!validateFields()) return;
 
-    private void deleteUser(UserPresenter userPresenter) {
-        if (emptyUserId()) return;
-        Long userId = getUserId();
-        userPresenter.deleteUser(userId);
-        form.output.setValue("User deleted");
+        User user = new User();
+        form.binder.writeBeanIfValid(user);
+        User createdUser = restTemplate.postForObject(BASE_URL, user, User.class);
+        userConsoleView.showMessage("User added");
+        userConsoleView.showUsers(Arrays.asList(createdUser), form.output);
         clearFields();
     }
 
-    @Nullable
+    private void updateUser() {
+        Long userId = getUserId();
+        if (userId == null || !validateFields()) return;
+
+        User user = new User();
+        form.binder.writeBeanIfValid(user);
+        user.setId(userId);
+        restTemplate.put(BASE_URL + "/" + userId, user);
+        userConsoleView.showMessage("User updated");
+        userConsoleView.showUsers(Arrays.asList(user), form.output);
+        clearFields();
+    }
+
+    private void deleteUser() {
+        Long userId = getUserId();
+        if (userId == null) return;
+
+        restTemplate.delete(BASE_URL + "/" + userId);
+        userConsoleView.showMessage("User deleted");
+        form.output.clear();
+        clearFields();
+    }
+
     private Long getUserId() {
-        Long userId;
         try {
-            userId = Long.parseLong(form.id.getValue());
-            if (userId < 1) {
-                Notification.show("ID must be a positive number for deletion.", 3000, Notification.Position.BOTTOM_CENTER);
+            Long id = Long.parseLong(form.id.getValue());
+            if (id < 1) {
+                Notification.show("ID must be positive", 2000, Notification.Position.BOTTOM_CENTER);
                 return null;
             }
+            return id;
         } catch (NumberFormatException e) {
-            Notification.show("ID must be a valid number.", 3000, Notification.Position.BOTTOM_CENTER);
+            Notification.show("Invalid ID", 2000, Notification.Position.BOTTOM_CENTER);
             return null;
         }
-        return userId;
     }
-
-    private boolean emptyUserId() {
-        if (form.id.isEmpty()) {
-            Notification.show("Please enter user details", 3000, Notification.Position.BOTTOM_CENTER);
-            return true;
-        }
-        return false;
-    }
-
 
     private boolean validateFields() {
         if (form.name.isEmpty() || form.email.isEmpty()) {
-            Notification.show("Please fill in all fields", 3000, Notification.Position.BOTTOM_CENTER);
+            Notification.show("Fill in all fields", 2000, Notification.Position.BOTTOM_CENTER);
             return false;
         }
         return true;
     }
 
     private void clearFields() {
-        form.name.clear();
-        form.name.setInvalid(false);
-        form.name.setErrorMessage(null);
-
-        form.email.clear();
-        form.email.setInvalid(false);
-        form.email.setErrorMessage(null);
-
         form.id.clear();
-        form.id.setInvalid(false);
-        form.id.setErrorMessage(null);
+        form.name.clear();
+        form.email.clear();
     }
 }

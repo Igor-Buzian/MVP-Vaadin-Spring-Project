@@ -1,2 +1,6 @@
+com\example\backend\dto\UserDto.class
 com\example\backend\impl\UserDaoImpl.class
 com\example\backend\service\UserPresenter.class
+com\example\backend\config\WebConfig$1.class
+com\example\backend\controller\UserController.class
+com\example\backend\config\WebConfig.class

@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.UserDto;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.example.core.dao.UserDao;
 import com.example.core.entity.User;
@@ -21,11 +22,12 @@ public class UserPresenter {
         this.view = view;
     }
 
-    public void addUser(User user) {
-        if (user.getName() == null || user.getName().trim().isEmpty()) {
+    public void addUser(UserDto userDto) {
+        if (userDto.getName() == null || userDto.getName().trim().isEmpty()) {
             view.showMessage("Name cannot be empty");
             return;
         }
+        User user = new User(userDto.getName(), userDto.getEmail());
         userDao.save(user);
         view.showMessage("User saved");
     }
@@ -42,12 +44,12 @@ public class UserPresenter {
     }
 
 
-    public void updateUser(User user) {
-        Optional<User> currentUser = userDao.getById(user.getId());
+    public void updateUser(UserDto userDto) {
+        Optional<User> currentUser = userDao.getById(userDto.getId());
         if (currentUser.isPresent()) {
             User u = currentUser.get();
-            u.setEmail(user.getEmail());
-            u.setName(user.getName());
+            u.setEmail(userDto.getEmail());
+            u.setName(userDto.getName());
             userDao.update(u);
             view.showMessage("User updated");
         } else {
@@ -55,10 +57,14 @@ public class UserPresenter {
         }
     }
 
-    public void showAllUsers(TextArea output) {
+   /* public void showAllUsers(TextArea output) {
         List<User> users = userDao.getAll();
         view.showUsers(users, output);
     }
+*/
+   public List<User> showAllUsers() {
+       return userDao.getAll();
+   }
 
     public User showUserById(Long id) {
         Optional<User> user = userDao.getById(id);

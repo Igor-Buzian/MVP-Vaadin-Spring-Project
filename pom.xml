@@ -25,22 +25,40 @@
         <postgresql.version>42.7.7</postgresql.version>
 
         <!-- Важное: версии Spring-фреймворка под Spring Boot 3.5.5 -->
-        <spring.orm.version>6.1.6</spring.orm.version>
-        <spring-tx>6.1.6</spring-tx>
+        <spring.orm.version>6.2.10</spring.orm.version>
+        <spring-tx>6.2.10</spring-tx>
+
     </properties>
 
 
     <modules>
-        <module>shared</module>
+        <module>application</module>
         <module>core</module>
+        <module>shared</module>
         <module>backend</module>
         <module>frontend</module>
         <module>batch</module>
-        <module>application</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webflux -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+                <version>3.5.5</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.orm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.orm.version}</version>
+            </dependency>
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
