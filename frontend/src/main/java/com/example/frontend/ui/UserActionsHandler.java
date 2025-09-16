@@ -7,6 +7,7 @@ import com.vaadin.flow.component.notification.Notification;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.ResponseEntity;
 import java.util.Arrays;
@@ -27,6 +28,8 @@ public class UserActionsHandler {
     }
 
     public void setupEventListeners() {
+        System.out.println("setupEventListeners is open");
+        System.out.println("url: "+BASE_URL);
         form.addButton.addClickListener(e -> addUser());
         form.updateButton.addClickListener(e -> updateUser());
         form.deleteButton.addClickListener(e -> deleteUser());
@@ -43,11 +46,10 @@ public class UserActionsHandler {
     private void findUser() {
         Long userId = getUserId();
         if (userId == null) return;
+        try {
+            User user = restTemplate.getForEntity(BASE_URL + "/" + userId, User.class).getBody();
 
-        User user = restTemplate.getForObject(BASE_URL + "/" + userId, User.class);
-        if (user != null) {
-            userConsoleView.showUsers(Arrays.asList(user), form.output);
-        } else {
+        } catch (HttpClientErrorException.NotFound e) {
             form.output.setValue("User not found.");
         }
     }

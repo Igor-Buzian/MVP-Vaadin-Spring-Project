@@ -14,7 +14,6 @@ public class UserController {
 
     private final UserPresenter userPresenter;
 
-    @Autowired
     public UserController(UserPresenter userPresenter) {
         this.userPresenter = userPresenter;
     }

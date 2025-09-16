@@ -12,7 +12,7 @@
   "jarResourcesFolder": "C:/Users/crme276/IdeaProjects/MVP-Vaadin-Spring-Project/frontend/./src/main/frontend/generated/jar-resources",
   "themeName": "",
   "clientServiceWorkerSource": "C:\\Users\\crme276\\IdeaProjects\\MVP-Vaadin-Spring-Project\\frontend\\target\\sw.ts",
-  "pwaEnabled": true,
-  "offlineEnabled": true,
-  "offlinePath": "'.'"
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
 }

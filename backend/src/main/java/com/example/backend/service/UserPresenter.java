@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserPresenter {
+public class UserPresenter  {
 
     private final UserDao userDao;
 
