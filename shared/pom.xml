@@ -17,12 +17,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
-            <scope>provided</scope> <!-- правильно, lombok в provided -->
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.example</groupId>
             <artifactId>core</artifactId>
-            <scope>provided</scope> <!-- модули проекта — provided -->
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>

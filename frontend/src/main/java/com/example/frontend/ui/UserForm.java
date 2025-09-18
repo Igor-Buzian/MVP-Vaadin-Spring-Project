@@ -2,7 +2,7 @@ package com.example.frontend.ui;
 
 
 
-import com.example.core.entity.User;
+import com.example.share.interfaces.dto.UserDto;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -31,7 +31,7 @@ public class UserForm extends VerticalLayout {
     Button findUser = new Button("Find user", new Icon(VaadinIcon.USER));
     Button findAllUsers = new Button("Find Users", new Icon(VaadinIcon.USERS));
 
-    Binder<User> binder = new Binder<>(User.class);
+    Binder<UserDto> binder = new Binder<>(UserDto.class);
 
     public void setupUI() {
         H3 header = headerInterface();
@@ -123,7 +123,7 @@ public class UserForm extends VerticalLayout {
         binder.forField(email)
                 .asRequired("Email can't be empty!")
                 .withValidator(email -> email.contains("@"), "int emait cane be '@'")
-                .bind(User::getEmail, User::setEmail);
+                .bind(UserDto::getEmail, UserDto::setEmail);
     }
 
     private void nameLogic() {
@@ -132,7 +132,7 @@ public class UserForm extends VerticalLayout {
         name.setHeight(60, Unit.PIXELS);
         binder.forField(name)
                 .asRequired("Name can't be empty!")
-                .bind(User::getName, User::setName);
+                .bind(UserDto::getName, UserDto::setName);
     }
 
     private void idLogic() {
@@ -154,7 +154,7 @@ public class UserForm extends VerticalLayout {
                         },
                         object -> object == null ? "" : object.toString()
                 )
-                .bind(User::getId, User::setId);
+                .bind(UserDto::getId, UserDto::setId);
     }
 
     private void buttonsVisual() {

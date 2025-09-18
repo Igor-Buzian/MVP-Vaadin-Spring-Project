@@ -3,6 +3,7 @@ package com.example.frontend.ui;
 import com.example.frontend.view.PopupView;
 import com.example.share.interfaces.dto.UserDto;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
+@PropertySource("classpath:MyFrontendApp.properties")
 public class UserActionsHandler {
 
     private final PopupView userConsoleView = new PopupView();

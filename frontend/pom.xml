@@ -27,7 +27,6 @@
             <artifactId>spring-web</artifactId>
         </dependency>
 
-        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -71,10 +70,6 @@
             <artifactId>antlr4-runtime</artifactId>
             <version>4.13.2</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.example</groupId>
