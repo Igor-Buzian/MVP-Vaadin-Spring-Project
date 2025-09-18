@@ -144,7 +144,7 @@ public class UserForm extends VerticalLayout {
                 .withConverter(
                         value -> {
                             if (value == null || value.trim().isEmpty()) {
-                                return null; // Для addUser это допустимо
+                                return null;
                             }
                             try {
                                 return Long.parseLong(value.trim());

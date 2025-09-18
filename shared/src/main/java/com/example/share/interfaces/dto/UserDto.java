@@ -1,11 +1,12 @@
-package com.example.backend.dto;
+package com.example.share.interfaces.dto;
 
 public class UserDto {
     private Long id;
     private String name;
     private String email;
 
-    public UserDto() {}
+    public UserDto() {
+    }
 
     public UserDto(String email, Long id, String name) {
         this.email = email;
@@ -35,6 +36,14 @@ public class UserDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "User:\n" +
+                "ID= " + id +
+                ",\n Name= " + name +
+                ",\n Email= " + email;
     }
 }
 

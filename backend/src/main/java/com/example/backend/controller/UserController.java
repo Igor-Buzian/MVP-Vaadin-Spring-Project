@@ -1,9 +1,9 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.UserDto;
+import com.example.share.interfaces.dto.UserDto;
 import com.example.backend.service.UserPresenter;
 import com.example.core.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,27 +19,52 @@ public class UserController {
     }
 
     @PostMapping
-    public void saveUser(@RequestBody UserDto userDto) {
-        userPresenter.addUser(userDto);
+    public ResponseEntity<?> saveUser(@RequestBody UserDto userDto) {
+        try {
+            User savedUser = userPresenter.addUser(userDto);
+            return ResponseEntity.ok(savedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid user data: " + e.getMessage());
+        }
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userPresenter.showAllUsers();
-    }
-
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userPresenter.showUserById(id);
+    public ResponseEntity<List<User>> getAllUsers() {
+      try {
+          List<User> users = userPresenter.showAllUsers();
+          return ResponseEntity.ok(users);
+      } catch (Exception e) {
+          throw new RuntimeException(e.getMessage());
+      }
     }
 
     @PutMapping("/{id}")
-    public void updateUser(@RequestBody UserDto userDto) {
-        userPresenter.updateUser(userDto);
+    public ResponseEntity<User> updateUser(@RequestBody UserDto userDto) {
+        try {
+            User updatedUser = userPresenter.updateUser(userDto);
+            return ResponseEntity.ok(updatedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+        try {
+            User user = userPresenter.showUserById(id);
+            return ResponseEntity.ok(user);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userPresenter.deleteUser(id);
+    public ResponseEntity<User> deleteUser(@PathVariable("id") Long id) {
+        try {
+            User deletedUser = userPresenter.deleteUser(id);
+            return ResponseEntity.ok(deletedUser);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

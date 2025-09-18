@@ -20,6 +20,7 @@
         <lombok.version>1.18.26</lombok.version>
         <jakarta.version>3.2.0</jakarta.version>
         <hibernate.orm.version>7.1.0.Final</hibernate.orm.version>
+        <slf4j-api.version>2.0.13</slf4j-api.version>
 
         <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
         <postgresql.version>42.7.7</postgresql.version>
@@ -42,13 +43,16 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webflux -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-webflux</artifactId>
                 <version>3.5.5</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
