@@ -14,11 +14,10 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" />
         </processorPath>
         <module name="batch" />
-        <module name="shared" />
         <module name="core" />
+        <module name="shared" />
         <module name="backend" />
         <module name="application" />
         <module name="frontend" />
