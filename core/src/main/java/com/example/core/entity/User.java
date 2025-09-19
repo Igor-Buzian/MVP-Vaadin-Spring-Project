@@ -25,6 +25,12 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(name = "failed_attempts", nullable = false, columnDefinition = "integer default 0")
+    private int failedAttempts;
+
+    @Column(name = "lock_time")
+    private LocalDateTime lockTime;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
@@ -33,18 +39,14 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @Column(name = "failed_attempts", nullable = false, columnDefinition = "integer default 0")
-    private int failedAttempts;
-
-    @Column(name = "lock_time")
-    private LocalDateTime lockTime;
 
     public User() {
     }
 
-    public User(String email, String name, String password) {
+    public User(String email, String name, String password, Set<Role> roles) {
         this.email = email;
         this.name = name;
         this.password = password;
+        this.roles = roles;
     }
 }

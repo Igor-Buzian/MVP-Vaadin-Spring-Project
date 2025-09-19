@@ -1,8 +1,9 @@
-package com.example.backend.fillter;
+package com.example.backend.filter;
 
-import com.example.backend.impl.UserDaoImpl;
+import com.example.backend.repository.UserDaoRepository;
 import com.example.backend.utils.JwtTokenUtils;
 import com.example.core.entity.User;
+import com.example.core.interfaces.UserDao;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -29,7 +30,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthFilter.class);
 
     private final JwtTokenUtils jwtTokenUtils;
-    private final UserDaoImpl userDao;
+    private final UserDao userDao;
 
     private String getToken(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();

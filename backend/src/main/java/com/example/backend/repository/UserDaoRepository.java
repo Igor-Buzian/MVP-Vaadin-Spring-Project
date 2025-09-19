@@ -1,6 +1,6 @@
-package com.example.backend.impl;
+package com.example.backend.repository;
 
-import com.example.share.interfaces.interfaces.UserDao;
+import com.example.core.interfaces.UserDao;
 import com.example.core.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -14,11 +14,11 @@ import org.slf4j.LoggerFactory;
 
 @Repository
 @Transactional
-public class UserDaoImpl implements UserDao {
+public class UserDaoRepository implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
-    private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserDaoRepository.class);
 
     @Override
     public Optional<User> getById(Long id) {
@@ -29,9 +29,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> getByEmail(String email) {
-        logger.info("Try to get email with name: {}",email);
-        return Optional.ofNullable(entityManager.find(User.class, email));
+        logger.info("Try to get email with name: {}", email);
+        List<User> result = entityManager.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class)
+                .setParameter("email", email)
+                .getResultList();
+
+        return result.stream().findFirst();
     }
+
 
     @Override
     public void save(User user) {

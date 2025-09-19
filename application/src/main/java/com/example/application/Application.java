@@ -5,12 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
-@SpringBootApplication
-@ComponentScan(basePackages = {"com.example.backend", "org.example.core", "org.example.shared"})
+@SpringBootApplication(scanBasePackages = {"com.example.backend"})
 @EntityScan(basePackages = { "com.example.core.entity"})
-@EnableJpaRepositories(basePackages = {"com.example.backend", "org.example.core", "org.example.shared"})
+@EnableJpaRepositories(basePackages = {"com.example.core.interfaces"})
 public class Application {
 
 	public static void main(String[] args) {

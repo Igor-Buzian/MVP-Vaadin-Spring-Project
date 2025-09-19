@@ -28,17 +28,14 @@ public class JwtTokenUtils {
     public String generateToken(User user) {
         Map<String, Object> claims = Map.of(
                 "username", user.getEmail(),
-                "enabled", true,
                 "role", user.getRoles() != null
                         ? user.getRoles().stream().map(r -> r.getName()).collect(Collectors.toList())
-                        : List.of(),
-                "updatedAt", new Date()
+                        : List.of()
         );
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(user.getEmail())
-                .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
