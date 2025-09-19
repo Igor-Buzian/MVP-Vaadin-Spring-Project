@@ -1,8 +1,9 @@
-import { F as c, j as d, b as h, x as g, a2 as u, s as v, P as f, H as m, u as k } from "./copilot-CmrCuzn5.js";
-import { r as s } from "./state-DQ5dfGun.js";
-import { m as w, e as $ } from "./overlay-monkeypatch-BVC5YV6e.js";
-import { B as x } from "./base-panel-C0yJocUe.js";
-import { i as A } from "./icons-CQ400rct.js";
+import { B as c, j as d, b as h, v as g, a2 as u, s as v, P as f, F as y, r as k } from "./copilot-Clqe7NnV.js";
+import { r as s } from "./state-B6616V18.js";
+import { e as w } from "./query-BykXNUlT.js";
+import { B as $ } from "./base-panel-DFXiqdfs.js";
+import { i as x } from "./icons-jl0-u2LC.js";
+import { m as A } from "./overlay-monkeypatch-ByWcx4Vt.js";
 const P = "copilot-feedback-panel{display:flex;flex-direction:column;font:var(--font-xsmall);gap:var(--space-200);padding:var(--space-150)}copilot-feedback-panel>p{margin:0}copilot-feedback-panel .dialog-footer{display:flex;gap:var(--space-100)}copilot-feedback-panel :is(vaadin-select,vaadin-text-area,vaadin-email-field){padding:0}copilot-feedback-panel :is(vaadin-select,vaadin-text-area,vaadin-email-field)::part(input-field),copilot-feedback-panel vaadin-select-value-button{padding:0}copilot-feedback-panel vaadin-select::part(toggle-button){align-items:center;display:flex;height:var(--size-m);justify-content:center;width:var(--size-m)}copilot-feedback-panel vaadin-text-area textarea{line-height:var(--line-height-1);padding:calc((var(--size-m) - var(--line-height-1)) / 2) var(--space-100)}copilot-feedback-panel vaadin-text-area:hover::part(input-field){background:none}copilot-feedback-panel vaadin-email-field input{padding:0 var(--space-100)}copilot-feedback-panel>*::part(label){font-weight:var(--font-weight-medium);line-height:var(--line-height-1);margin:0;padding:0 var(--space-150) var(--space-50) 0}copilot-feedback-panel>*::part(helper-text){line-height:var(--line-height-1);margin:0}";
 var F = Object.defineProperty, T = Object.getOwnPropertyDescriptor, o = (e, t, n, l) => {
   for (var a = l > 1 ? void 0 : l ? T(t, n) : t, p = e.length - 1, r; p >= 0; p--)
@@ -10,7 +11,7 @@ var F = Object.defineProperty, T = Object.getOwnPropertyDescriptor, o = (e, t, n
   return l && a && F(t, n, a), a;
 };
 const D = "https://github.com/vaadin", b = "https://github.com/vaadin/copilot/issues/new", E = "?template=feature_request.md&title=%5BFEATURE%5D", U = "A short, concise description of the bug and why you consider it a bug. Any details like exceptions and logs can be helpful as well.", C = "Please provide as many details as possible, this will help us deliver a fix as soon as possible.%0AThank you!%0A%0A%23%23%23 Description of the Bug%0A%0A{description}%0A%0A%23%23%23 Expected Behavior%0A%0AA description of what you would expect to happen. (Sometimes it is clear what the expected outcome is if something does not work, other times, it is not super clear.)%0A%0A%23%23%23 Minimal Reproducible Example%0A%0AWe would appreciate the minimum code with which we can reproduce the issue.%0A%0A%23%23%23 Versions%0A{versionsInfo}";
-let i = class extends x {
+let i = class extends $ {
   constructor() {
     super(), this.description = "", this.types = [
       {
@@ -58,7 +59,7 @@ let i = class extends x {
       >${this.renderContent()}${this.renderFooter()}`;
   }
   firstUpdated() {
-    w(this);
+    A(this);
   }
   renderContent() {
     return this.message === void 0 ? c`
@@ -119,7 +120,7 @@ let i = class extends x {
         notify: !1
       }) : this.openGithub(null, this);
     }}">
-              <span class="prefix">${A.github}</span>
+              <span class="prefix">${x.github}</span>
               Create GitHub Issue
             </button>
             <button @click="${this.close}">Cancel</button>
@@ -190,12 +191,12 @@ o([
   s()
 ], i.prototype, "topics", 2);
 o([
-  $("vaadin-text-area")
+  w("vaadin-text-area")
 ], i.prototype, "descriptionField", 2);
 i = o([
   k("copilot-feedback-panel")
 ], i);
-const y = m({
+const m = y({
   header: "Help Us Improve!",
   tag: "copilot-feedback-panel",
   width: 500,
@@ -205,13 +206,13 @@ const y = m({
     left: 100
   },
   individual: !0
-}), q = {
+}), B = {
   init(e) {
-    e.addPanel(y);
+    e.addPanel(m);
   }
 };
-window.Vaadin.copilot.plugins.push(q);
-g.addPanel(y);
+window.Vaadin.copilot.plugins.push(B);
+g.addPanel(m);
 export {
   i as CopilotFeedbackPanel
 };

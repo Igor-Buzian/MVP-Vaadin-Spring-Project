@@ -1,4 +1,4 @@
-import { v as t, x as n, j as a, aq as i, b as o } from "./copilot-CmrCuzn5.js";
+import { M as t, v as n, j as a, ar as i, b as r } from "./copilot-Clqe7NnV.js";
 class l extends t {
   constructor() {
     super(...arguments), this.eventBusRemovers = [], this.messageHandlers = {}, this.handleESC = (e) => {
@@ -10,7 +10,7 @@ class l extends t {
     return this;
   }
   onEventBus(e, s) {
-    this.eventBusRemovers.push(o.on(e, s));
+    this.eventBusRemovers.push(r.on(e, s));
   }
   connectedCallback() {
     super.connectedCallback(), this.addESCListener();

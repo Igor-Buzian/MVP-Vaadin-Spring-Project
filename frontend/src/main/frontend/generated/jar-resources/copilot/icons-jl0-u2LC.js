@@ -1,4 +1,4 @@
-import { ar as t } from "./copilot-CmrCuzn5.js";
+import { as as t } from "./copilot-Clqe7NnV.js";
 const o = {
   adsClick: t`
 <svg

@@ -1,6 +1,6 @@
-import { u as f, b as c, E as g, F as l, x as b, a0 as m, X as t, H as $ } from "./copilot-CmrCuzn5.js";
-import { B as v } from "./base-panel-C0yJocUe.js";
-import { i as e } from "./icons-CQ400rct.js";
+import { r as f, b as c, E as g, B as l, v as b, a0 as m, X as t, F as $ } from "./copilot-Clqe7NnV.js";
+import { B as v } from "./base-panel-DFXiqdfs.js";
+import { i as e } from "./icons-jl0-u2LC.js";
 const y = 'copilot-shortcuts-panel{display:flex;flex-direction:column;padding:var(--space-150)}copilot-shortcuts-panel h3{font:var(--font-xsmall-semibold);margin-bottom:var(--space-100);margin-top:0}copilot-shortcuts-panel h3:not(:first-of-type){margin-top:var(--space-200)}copilot-shortcuts-panel ul{display:flex;flex-direction:column;list-style:none;margin:0;padding:0}copilot-shortcuts-panel ul li{display:flex;align-items:center;gap:var(--space-50);position:relative}copilot-shortcuts-panel ul li:not(:last-of-type):before{border-bottom:1px dashed var(--border-color);content:"";inset:auto 0 0 calc(var(--size-m) + var(--space-50));position:absolute}copilot-shortcuts-panel ul li span:has(svg){align-items:center;display:flex;height:var(--size-m);justify-content:center;width:var(--size-m)}copilot-shortcuts-panel .kbds{margin-inline-start:auto}copilot-shortcuts-panel kbd{align-items:center;border:1px solid var(--border-color);border-radius:var(--radius-2);box-sizing:border-box;display:inline-flex;font-family:var(--font-family);font-size:var(--font-size-1);line-height:var(--line-height-1);padding:0 var(--space-50)}', u = window.Vaadin.copilot.tree;
 if (!u)
   throw new Error("Tried to access copilot tree before it was initialized.");

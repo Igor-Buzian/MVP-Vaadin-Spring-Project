@@ -1,7 +1,7 @@
-import { a as D } from "./copilot-CmrCuzn5.js";
-var y, v;
-function E() {
-  return v || (v = 1, y = function() {
+import { a as D } from "./copilot-Clqe7NnV.js";
+var g, b;
+function x() {
+  return b || (b = 1, g = function() {
     var a = document.getSelection();
     if (!a.rangeCount)
       return function() {
@@ -23,13 +23,13 @@ function E() {
         a.addRange(d);
       }), o && o.focus();
     };
-  }), y;
+  }), g;
 }
-var g, C;
-function h() {
-  if (C) return g;
+var m, C;
+function E() {
+  if (C) return m;
   C = 1;
-  var a = E(), o = {
+  var a = x(), o = {
     "text/plain": "Text",
     "text/html": "Url",
     default: "Text"
@@ -39,10 +39,10 @@ function h() {
     return n.replace(/#{\s*key\s*}/g, t);
   }
   function d(n, t) {
-    var c, m, b, u, l, e, f = !1;
+    var c, y, v, u, l, e, f = !1;
     t || (t = {}), c = t.debug || !1;
     try {
-      b = a(), u = document.createRange(), l = document.getSelection(), e = document.createElement("span"), e.textContent = n, e.ariaHidden = "true", e.style.all = "unset", e.style.position = "fixed", e.style.top = 0, e.style.clip = "rect(0, 0, 0, 0)", e.style.whiteSpace = "pre", e.style.webkitUserSelect = "text", e.style.MozUserSelect = "text", e.style.msUserSelect = "text", e.style.userSelect = "text", e.addEventListener("copy", function(r) {
+      v = a(), u = document.createRange(), l = document.getSelection(), e = document.createElement("span"), e.textContent = n, e.ariaHidden = "true", e.style.all = "unset", e.style.position = "fixed", e.style.top = 0, e.style.clip = "rect(0, 0, 0, 0)", e.style.whiteSpace = "pre", e.style.webkitUserSelect = "text", e.style.MozUserSelect = "text", e.style.msUserSelect = "text", e.style.userSelect = "text", e.addEventListener("copy", function(r) {
         if (r.stopPropagation(), t.format)
           if (r.preventDefault(), typeof r.clipboardData > "u") {
             c && console.warn("unable to use e.clipboardData"), c && console.warn("trying IE specific stuff"), window.clipboardData.clearData();
@@ -61,20 +61,17 @@ function h() {
       try {
         window.clipboardData.setData(t.format || "text", n), t.onCopy && t.onCopy(window.clipboardData), f = !0;
       } catch (p) {
-        c && console.error("unable to copy using clipboardData: ", p), c && console.error("falling back to prompt"), m = i("message" in t ? t.message : s), window.prompt(m, n);
+        c && console.error("unable to copy using clipboardData: ", p), c && console.error("falling back to prompt"), y = i("message" in t ? t.message : s), window.prompt(y, n);
       }
     } finally {
-      l && (typeof l.removeRange == "function" ? l.removeRange(u) : l.removeAllRanges()), e && document.body.removeChild(e), b();
+      l && (typeof l.removeRange == "function" ? l.removeRange(u) : l.removeAllRanges()), e && document.body.removeChild(e), v();
     }
     return f;
   }
-  return g = d, g;
+  return m = d, m;
 }
-var x = h();
-const S = /* @__PURE__ */ D(x), T = window.Vaadin.copilot._earlyProjectState;
-if (!T)
-  throw new Error("Tried to access early project state before it was initialized.");
+var h = E();
+const T = /* @__PURE__ */ D(h);
 export {
-  S as c,
-  T as e
+  T as c
 };

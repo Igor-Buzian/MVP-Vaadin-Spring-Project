@@ -13,22 +13,25 @@
     <description>Parent POM for Vaadin + Spring + Batch multi-module project</description>
 
     <properties>
+        <vaadin.version>24.9.0</vaadin.version>
+        <vaadin-spring-boot-starter.version>24.9.0</vaadin-spring-boot-starter.version>
+
         <java.version>17</java.version>
-        <vaadin.version>24.8.8</vaadin.version>
-        <vaadin-spring-boot-starter.version>24.8.8</vaadin-spring-boot-starter.version>
-        <spring-boot.version>3.5.5</spring-boot.version>
+        <spring-boot.version> 3.5.5</spring-boot.version>
         <lombok.version>1.18.26</lombok.version>
         <jakarta.version>3.2.0</jakarta.version>
         <hibernate.orm.version>7.1.0.Final</hibernate.orm.version>
         <slf4j-api.version>2.0.13</slf4j-api.version>
+        <jjwt-api.version>0.13.0</jjwt-api.version>
+        <h2.version>2.3.232</h2.version>
 
         <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
         <postgresql.version>42.7.7</postgresql.version>
 
-        <!-- Важное: версии Spring-фреймворка под Spring Boot 3.5.5 -->
-        <spring.orm.version>6.2.10</spring.orm.version>
-        <spring-tx>6.2.10</spring-tx>
-
+        <spring.orm.version>6.2.11</spring.orm.version>
+        <spring-tx>6.2.11</spring-tx>
+        <spring-security-config.version>6.5.4</spring-security-config.version>
+        <spring-security-core.version>6.5.4</spring-security-core.version>
     </properties>
 
 
@@ -43,6 +46,38 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${spring-security-config.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring-security-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring-security-core.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -148,6 +183,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-spring-boot-starter</artifactId>
                 <version>${vaadin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring-boot.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -263,7 +303,6 @@
                     <plugin>
                         <groupId>com.vaadin</groupId>
                         <artifactId>vaadin-maven-plugin</artifactId>
-                        <version>${vaadin.version}</version>
                         <executions>
                             <execution>
                                 <id>prepare-frontend</id>

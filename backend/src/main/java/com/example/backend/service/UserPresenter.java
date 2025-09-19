@@ -20,7 +20,7 @@ public class UserPresenter  {
         if (userDto.getName() == null || userDto.getName().trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be empty");
         }
-        User user = new User(userDto.getName(), userDto.getEmail());
+        User user = new User(userDto.getName(), userDto.getEmail(), userDto.getPassword());
         userDao.save(user);
         return user;
     }

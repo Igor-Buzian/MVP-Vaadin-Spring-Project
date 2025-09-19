@@ -28,6 +28,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public Optional<User> getByEmail(String email) {
+        logger.info("Try to get email with name: {}",email);
+        return Optional.ofNullable(entityManager.find(User.class, email));
+    }
+
+    @Override
     public void save(User user) {
         logger.info("Try to save user with " +
                 "\n id: {} \n with name: {} \n with email: {}"
