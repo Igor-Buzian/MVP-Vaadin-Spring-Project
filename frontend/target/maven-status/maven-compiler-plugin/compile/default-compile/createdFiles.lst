@@ -1,6 +1,10 @@
 com\example\frontend\ui\AdminView.class
-com\example\frontend\ui\UserActionsHandler.class
-com\example\frontend\ui\MainView.class
+com\example\frontend\ui\user\UserActionsHandler.class
+com\example\frontend\ui\user\MainView.class
+com\example\frontend\ui\auth\LoginForm.class
 com\example\frontend\view\PopupView.class
+com\example\frontend\ui\registration\RegisterForm.class
 com\example\frontend\FrontendApplication.class
-com\example\frontend\ui\UserForm.class
+com\example\frontend\ui\registration\RegistrationActionsHandler.class
+com\example\frontend\ui\registration\RegisterView.class
+com\example\frontend\ui\user\UserForm.class

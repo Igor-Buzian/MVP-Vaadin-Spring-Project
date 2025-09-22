@@ -5,10 +5,11 @@ import com.example.share.interfaces.dto.UserDto;
 import com.example.share.interfaces.interfaces.UserView;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.TextArea;
+import org.springframework.stereotype.Component;
 
 
 import java.util.List;
-
+@Component
 public class PopupView implements UserView {
 
     @Override

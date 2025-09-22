@@ -1,6 +1,10 @@
 C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\FrontendApplication.java
 C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\ui\AdminView.java
-C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\ui\MainView.java
-C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\ui\UserActionsHandler.java
-C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\ui\UserForm.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\ui\auth\LoginForm.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\ui\registration\RegisterForm.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\ui\registration\RegisterView.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\ui\registration\RegistrationActionsHandler.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\ui\user\MainView.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\ui\user\UserActionsHandler.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\ui\user\UserForm.java
 C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\frontend\src\main\java\com\example\frontend\view\PopupView.java

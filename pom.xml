@@ -25,6 +25,7 @@
         <jjwt-api.version>0.13.0</jjwt-api.version>
         <h2.version>2.3.232</h2.version>
         <flyway-core>11.13.0</flyway-core>
+        <googlerecaptcha>1.1.0</googlerecaptcha>
 
         <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
         <postgresql.version>42.7.7</postgresql.version>
@@ -47,6 +48,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.vaadin.addons.googlerecaptcha</groupId>
+                <artifactId>googlerecaptcha</artifactId>
+                <version>${googlerecaptcha}</version>
+            </dependency>
             <dependency>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-core</artifactId>

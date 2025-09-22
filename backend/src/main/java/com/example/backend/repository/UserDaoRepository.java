@@ -70,4 +70,14 @@ public class UserDaoRepository implements UserDao {
         logger.info("Try to take all users");
         return entityManager.createQuery("FROM User", User.class).getResultList();
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        Long count = entityManager
+                .createQuery("SELECT COUNT(u) FROM User u WHERE u.email = :email", Long.class)
+                .setParameter("email", email)
+                .getSingleResult();
+
+        return count > 0;
+    }
 }

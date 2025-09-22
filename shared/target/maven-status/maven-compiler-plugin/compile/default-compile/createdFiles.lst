@@ -1,3 +1,5 @@
+com\example\share\interfaces\dto\JwtResponse.class
+com\example\share\interfaces\dto\RegisterDtoValues.class
 com\example\share\interfaces\dto\UserDto.class
-com\example\share\interfaces\interfaces\UserDao.class
 com\example\share\interfaces\interfaces\UserView.class
+com\example\share\interfaces\dto\JwtRequest.class

@@ -1,3 +1,4 @@
-com\example\core\entity\Permission.class
-com\example\core\entity\Role.class
+com\example\core\interfaces\RoleRepository.class
 com\example\core\entity\User.class
+com\example\core\interfaces\UserDao.class
+com\example\core\entity\Role.class

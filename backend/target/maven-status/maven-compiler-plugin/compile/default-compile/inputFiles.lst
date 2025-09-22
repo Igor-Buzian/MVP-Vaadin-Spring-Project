@@ -1,7 +1,14 @@
 C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\config\SecurityConfig.java
-C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\config\WebConfig.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\controller\AuthController.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\controller\RegisterController.java
 C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\controller\UserController.java
-C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\fillter\JwtAuthFilter.java
-C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\impl\UserDaoImpl.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\filter\JwtAuthFilter.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\repository\UserDaoRepository.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\service\auth\AccountSecurityService.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\service\auth\AuthService.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\service\auth\CaptchaService.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\service\auth\LoginAttemptsCountService.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\service\auth\LoginAttemptService.java
+C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\service\auth\RegistrationService.java
 C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\service\UserPresenter.java
 C:\Users\crme276\IdeaProjects\MVP-Vaadin-Spring-Project\backend\src\main\java\com\example\backend\utils\JwtTokenUtils.java
