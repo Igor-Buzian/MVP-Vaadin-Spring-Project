@@ -26,13 +26,13 @@ public class Role implements GrantedAuthority {
     @Column(nullable = false,unique = true)
     String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+/*    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "role_permissions",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id")
     )
-    Set<Permission> permissions= new HashSet<>();
+    Set<Permission> permissions= new HashSet<>();*/
 
     /**
      * Returns the authority string for this role.

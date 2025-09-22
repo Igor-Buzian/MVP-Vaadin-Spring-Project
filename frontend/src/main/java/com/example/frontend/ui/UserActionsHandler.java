@@ -2,6 +2,7 @@ package com.example.frontend.ui;
 
 import com.example.frontend.view.PopupView;
 import com.example.share.interfaces.dto.UserDto;
+import com.vaadin.flow.component.UI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Service
 @PropertySource("classpath:MyFrontendApp.properties")
@@ -33,6 +36,7 @@ public class UserActionsHandler {
         form.deleteButton.addClickListener(e -> deleteUser());
         form.findUser.addClickListener(e -> findUser());
         form.findAllUsers.addClickListener(e -> findAllUsers());
+       // resetBinderWithDelay(5);
     }
 
     private void findAllUsers() {
@@ -64,9 +68,9 @@ public class UserActionsHandler {
         if (!validateFields()) return;
 
         UserDto userDto = new UserDto();
-        userDto.setId(21l);
         userDto.setName(form.name.getValue());
         userDto.setEmail(form.email.getValue());
+        userDto.setPassword(form.password.getValue());
 
         restTemplate.postForEntity(BASE_URL, userDto, Void.class);
         userConsoleView.showMessage("User added");
@@ -83,6 +87,7 @@ public class UserActionsHandler {
         userDto.setId(userId);
         userDto.setName(form.name.getValue());
         userDto.setEmail(form.email.getValue());
+        userDto.setPassword(form.password.getValue());
 
         try {
             restTemplate.put(BASE_URL + "/" + userId, userDto);
@@ -141,5 +146,23 @@ public class UserActionsHandler {
         form.id.clear();
         form.id.setInvalid(false);
         form.id.setErrorMessage(null);
+
+        form.password.clear();
+        form.password.setInvalid(false);
+        form.password.setErrorMessage(null);
     }
+
+   /* public void resetBinderWithDelay(int delayMillis) {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                UI ui = UI.getCurrent();
+                if (ui != null) {
+                    ui.access(() -> {
+                        clearFields();
+                    });
+                }
+            }
+        }, delayMillis);
+    }*/
 }

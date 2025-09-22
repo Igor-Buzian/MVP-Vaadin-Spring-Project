@@ -1,0 +1,12 @@
+2025-09-22 09:07:58.020100+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ROLE_PERMISSIONS" not found; SQL statement:
+select p1_0.role_id,p1_1.id,p1_1.description,p1_1.name from role_permissions p1_0 join permissions p1_1 on p1_1.id=p1_0.permission_id where p1_0.role_id=? [42102-232]
+2025-09-22 09:09:54.950330+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ROLE_PERMISSIONS" not found; SQL statement:
+select r1_0.user_id,r1_1.id,r1_1.name,p1_0.role_id,p1_1.id,p1_1.description,p1_1.name from user_roles r1_0 join roles r1_1 on r1_1.id=r1_0.role_id left join role_permissions p1_0 on r1_1.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where r1_0.user_id=? [42102-232]
+2025-09-22 09:10:00.250774+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ROLE_PERMISSIONS" not found; SQL statement:
+select u1_0.id,u1_0.email,u1_0.failed_attempts,u1_0.lock_time,u1_0.name,u1_0.password,r1_0.user_id,r1_1.id,r1_1.name,p1_0.role_id,p1_1.id,p1_1.description,p1_1.name from users u1_0 left join user_roles r1_0 on u1_0.id=r1_0.user_id left join roles r1_1 on r1_1.id=r1_0.role_id left join role_permissions p1_0 on r1_1.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where u1_0.id=? [42102-232]
+2025-09-22 09:15:35.323560+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ROLE_PERMISSIONS" not found; SQL statement:
+select p1_0.role_id,p1_1.id,p1_1.description,p1_1.name from role_permissions p1_0 join permissions p1_1 on p1_1.id=p1_0.permission_id where p1_0.role_id=? [42102-232]

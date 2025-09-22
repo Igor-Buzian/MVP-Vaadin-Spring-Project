@@ -12,6 +12,7 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.data.binder.Binder;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -23,6 +24,7 @@ public class UserForm extends VerticalLayout {
     TextArea id = new TextArea("User id");
     TextArea name = new TextArea("Name");
     TextArea email = new TextArea("Email");
+    PasswordField password = new PasswordField("Password");
     TextArea output = new TextArea("Output");
 
     Button addButton = new Button("Add", new Icon(VaadinIcon.PLUS));
@@ -39,6 +41,7 @@ public class UserForm extends VerticalLayout {
         idLogic();
         nameLogic();
         emailLogic();
+        passwordLogic();
         outputInfo();
         buttonsVisual();
 
@@ -104,16 +107,26 @@ public class UserForm extends VerticalLayout {
     private VerticalLayout userForm() {
         FormLayout formLayout = new FormLayout();
         formLayout.setWidth("350px");
-        formLayout.add(id, name, email);
+        formLayout.add(id, name, email, password);
         formLayout.setColspan(id, 1);
         formLayout.setColspan(name, 1);
         formLayout.setColspan(email, 1);
+        formLayout.setColspan(password, 1);
 
         VerticalLayout formWrapper = new VerticalLayout(formLayout);
         formWrapper.setPadding(false);
         formWrapper.setSpacing(false);
         formWrapper.setWidth(null);
         return formWrapper;
+    }
+
+    private void passwordLogic(){
+        password.setPlaceholder("Enter your password");
+        password.setWidthFull();
+        password.setHeight(60, Unit.PIXELS);
+        binder.forField(password)
+                .asRequired("Email can't be empty!")
+                .bind(UserDto::getEmail, UserDto::setEmail);
     }
 
     private void emailLogic() {
