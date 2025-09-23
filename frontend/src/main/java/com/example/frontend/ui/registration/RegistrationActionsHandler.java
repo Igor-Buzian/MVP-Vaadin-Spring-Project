@@ -2,12 +2,11 @@ package com.example.frontend.ui.registration;
 
 import com.example.frontend.view.PopupView;
 import com.example.share.interfaces.dto.RegisterDtoValues;
-import com.example.share.interfaces.dto.UserDto;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.page.PendingJavaScriptResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -65,8 +64,13 @@ public class RegistrationActionsHandler {
             dtoValues.setConfirmPassword(registerForm.passwordConfirm.getValue());
             dtoValues.setCaptchaResponse(this.responseToken);
 
-            template.postForEntity(BASE_URL, dtoValues, RegisterDtoValues.class);
-            view.showMessage("Registration successful!");
+            ResponseEntity<Void> response = template.postForEntity(BASE_URL, dtoValues, Void.class);
+
+            if (response.getStatusCode().is3xxRedirection()) {
+                String location = response.getHeaders().getLocation().toString();
+                UI.getCurrent().navigate(location);
+            }
+
         } catch (Exception ex) {
             view.showMessage("Registration failed: " + ex.getMessage());
         }

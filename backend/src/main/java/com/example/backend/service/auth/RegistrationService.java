@@ -47,14 +47,14 @@ public class RegistrationService {
     public ResponseEntity<?> createNewUser(RegisterDtoValues registerDtoValues, HttpServletResponse response, HttpServletRequest request){
 
         try {
-           /* if(userPresenter.existsByEmail(registerDtoValues.getEmail())){
+            if(userPresenter.existsByEmail(registerDtoValues.getEmail())){
                 String ip = request.getRemoteAddr();
                 if(loginAttemptService.isBloked(ip))
                     return ResponseEntity.status(HttpStatus.FORBIDDEN).header("Location", "/register?error=ip_banned").build();
                 if(!loginAttemptService.validateCaptcha(ip, registerDtoValues.getCaptchaResponse()))
                     return ResponseEntity.status(HttpStatus.FORBIDDEN).header("Location", "/register?error=ip_banned").build();
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).header("Location","http://localhost:8080/register?error=exist_mail").build();
-            }*/
+            }
 
             User user = new User();
             user.setEmail(registerDtoValues.getEmail());

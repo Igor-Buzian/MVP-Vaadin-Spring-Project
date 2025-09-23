@@ -104,10 +104,6 @@ public class UserPresenter {
 
     public User getUserByEmail(String email) {
         Optional<User> user = userDao.getByEmail(email);
-        /*JwtRequest jwtRequest = new JwtRequest();
-        jwtRequest.setEmail(user.get().getEmail());
-        jwtRequest.setPassword(user.get().getPassword());*/
-        //return jwtRequest;
         return user.get();
     }
 

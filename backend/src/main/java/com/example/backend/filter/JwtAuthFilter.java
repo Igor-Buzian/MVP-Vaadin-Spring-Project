@@ -61,7 +61,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                         User user = optionalUser.get();
                         List<String> rolesFromToken = jwtTokenUtils.getRoleFromToken(token);
 
-                        // Создаем authorities из ролей
                         List<SimpleGrantedAuthority> authorities = rolesFromToken.stream()
                                 .map(SimpleGrantedAuthority::new)
                                 .toList();

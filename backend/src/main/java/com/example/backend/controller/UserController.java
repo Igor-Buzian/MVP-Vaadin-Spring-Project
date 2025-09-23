@@ -29,10 +29,13 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserDto>> getAllUsers() {
       try {
           List<User> users = userPresenter.showAllUsers();
-          return ResponseEntity.ok(users);
+          List<UserDto> userDtos = users.stream()
+                  .map(user -> new UserDto(user.getId(), user.getEmail(), user.getName()))
+                  .toList();
+          return ResponseEntity.ok(userDtos);
       } catch (Exception e) {
           throw new RuntimeException(e.getMessage());
       }
@@ -49,10 +52,11 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id) {
         try {
             User user = userPresenter.showUserById(id);
-            return ResponseEntity.ok(user);
+            UserDto userDto = new UserDto(user.getId(), user.getEmail(), user.getName());
+            return ResponseEntity.ok(userDto);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }

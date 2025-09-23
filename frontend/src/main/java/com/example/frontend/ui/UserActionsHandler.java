@@ -5,6 +5,8 @@ import com.example.share.interfaces.dto.UserDto;
 import com.vaadin.flow.component.UI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -41,9 +43,13 @@ public class UserActionsHandler {
 
     private void findAllUsers() {
         try {
-            ResponseEntity<UserDto[]> response = restTemplate.getForEntity(BASE_URL, UserDto[].class);
-            List<UserDto> users = Arrays.asList(response.getBody());
-            userConsoleView.showUsers(users, form.output);
+            ResponseEntity<List<UserDto>> users = restTemplate.exchange(
+                    BASE_URL,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<UserDto>>() {}
+            );
+            userConsoleView.showUsers(users.getBody(), form.output);
         } catch (Exception e) {
             userConsoleView.showMessage("Failed to load users");
         }
