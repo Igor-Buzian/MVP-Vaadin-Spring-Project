@@ -21,7 +21,7 @@ public class RegisterController {
     private final RegistrationService registrationService;
 
     @PostMapping
-    public ResponseEntity<?> createNewUser(@ModelAttribute() RegisterDtoValues registerDtoValues, BindingResult bindingResult, HttpServletResponse response, HttpServletRequest request){
+    public ResponseEntity<?> createNewUser(@RequestBody RegisterDtoValues registerDtoValues, BindingResult bindingResult, HttpServletResponse response, HttpServletRequest request){
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             bindingResult.getFieldErrors().forEach(error ->

@@ -21,25 +21,51 @@ public class RegistrationActionsHandler {
     private final PopupView view;
     private final RegisterForm registerForm;
     private final RestTemplate template = new RestTemplate();
+    private String responseToken;
+
+    public String getResponseToken() {
+        return responseToken;
+    }
+
+    public void setResponseToken(String responseToken) {
+        this.responseToken = responseToken;
+    }
 
     public void setupEventListeners() {
-       // registerForm.registerButton.addClickListener(e -> register());
+        //registerForm.recaptcha.addAttachListener(e-> setupListeners());
+        registerForm.registerButton.addClickListener(e -> register());
     }
+
+    private void setupListeners() {
+        UI.getCurrent().getPage().executeJs("return grecaptcha.getResponse();")
+                .then(String.class, token -> {
+                    this.setResponseToken(token);
+
+                    if (token == null || token.isEmpty()) {
+                        view.showMessage("Invalid captcha!");
+                    } else {
+                        view.showMessage("Success captcha!");
+                        sendRegistration();
+                    }
+                });
+    }
+
 
     private void register() {
         if (ValidationLogic()) return;
-        sendRegistration();
+        setupListeners();
     }
 
     private void sendRegistration() {
         try {
-            RegisterDtoValues userDto = new RegisterDtoValues();
-            userDto.setUsername(registerForm.name.getValue());
-            userDto.setEmail(registerForm.email.getValue());
-            userDto.setPassword(registerForm.password.getValue());
-           // userDto.setCaptchaResponse(registerForm.captchaResponse);
+            RegisterDtoValues dtoValues = new RegisterDtoValues();
+            dtoValues.setUsername(registerForm.name.getValue());
+            dtoValues.setEmail(registerForm.email.getValue());
+            dtoValues.setPassword(registerForm.password.getValue());
+            dtoValues.setConfirmPassword(registerForm.passwordConfirm.getValue());
+            dtoValues.setCaptchaResponse(this.responseToken);
 
-            template.postForEntity(BASE_URL, userDto, Void.class);
+            template.postForEntity(BASE_URL, dtoValues, RegisterDtoValues.class);
             view.showMessage("Registration successful!");
         } catch (Exception ex) {
             view.showMessage("Registration failed: " + ex.getMessage());

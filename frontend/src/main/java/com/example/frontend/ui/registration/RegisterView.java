@@ -13,15 +13,11 @@ import lombok.RequiredArgsConstructor;
 
 @Route("register")
 public class RegisterView extends VerticalLayout {
-    private final RegisterForm form;
-    private final RegistrationActionsHandler actionsHandler;
 
     public RegisterView(RegisterForm form, RegistrationActionsHandler actionsHandler) {
-        this.form = form;
-        this.actionsHandler = actionsHandler;
-
         form.setupUI();
-       // actionsHandler.setupEventListeners();
+        actionsHandler.setupEventListeners();
+
         add(form);
     }
 }

@@ -57,9 +57,8 @@ public class UserPresenter {
             throw new IllegalArgumentException("Password cannot be empty");
     }
 
-    public User createUserEntity(User user) {
+    public void createUserEntity(User user) {
         userDao.save(user);
-        return user;
     }
 
 

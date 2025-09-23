@@ -6,7 +6,9 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +24,10 @@ public class JwtTokenUtils {
     private Long expiration;
 
     private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(secret.getBytes());
+        byte[] decodedKey = Base64.getDecoder().decode(secret);
+        return Keys.hmacShaKeyFor(decodedKey);
     }
+
 
     public String generateToken(User user) {
         Map<String, Object> claims = Map.of(
@@ -33,10 +37,10 @@ public class JwtTokenUtils {
                         : List.of()
         );
 
-        return Jwts.builder()
+        return Jwts
+                .builder()
                 .setClaims(claims)
-                .setSubject(user.getEmail())
-                .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
+                .setExpiration(new Date(System.currentTimeMillis()+expiration*1000))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
     }

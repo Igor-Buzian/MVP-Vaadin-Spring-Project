@@ -21,13 +21,12 @@ public class AuthController {
      * @param jwtRequest        The DTO containing user login credentials.
      * @param response          The HttpServletResponse.
      * @param request           The HttpServletRequest.
-     * @param captchaResponse   The reCAPTCHA response from the client.
      * @return A ResponseEntity containing the authentication result (e.g., JWT token) or an error.
      */
     @PostMapping
-    public ResponseEntity<?> auth(JwtRequest jwtRequest, HttpServletResponse response, HttpServletRequest request , @RequestParam(name = "g-recaptcha-response", required = false) String captchaResponse)
+    public ResponseEntity<?> auth(JwtRequest jwtRequest, HttpServletResponse response, HttpServletRequest request)
     {
-        return authService.authUser(jwtRequest, request,response,captchaResponse);
+        return authService.authUser(jwtRequest, request,response);
     }
 
     /**
