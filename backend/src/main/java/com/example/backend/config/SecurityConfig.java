@@ -70,24 +70,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-    /*    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.disable())
-                .headers(headers -> headers
-                        .defaultsDisabled() // отключает все заголовки по умолчанию
-                        .frameOptions(frame -> frame.sameOrigin()) // разрешаем iframe для H2 консоли
-                )
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin").hasAuthority("ROLE_ADMIN") // Только /admin требует роль
-                        .anyRequest().permitAll() // Всё остальное разрешено
-                )
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
-    }*/
 }
