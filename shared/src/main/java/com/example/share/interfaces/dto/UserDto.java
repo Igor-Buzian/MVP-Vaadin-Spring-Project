@@ -1,5 +1,6 @@
 package com.example.share.interfaces.dto;
 
+import com.example.core.entity.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,13 +15,13 @@ public class UserDto {
     private String password;
     private Set<String> roles;
 
-    public UserDto() {
-    }
+    public UserDto(){}
 
-    public UserDto(Long id, String email, String name) {
+    public UserDto(Long id, String email, String name/*, Set<Role> roles*/) {
         this.id = id;
         this.email = email;
         this.name = name;
+      //  this.roles = roles;
     }
 
     @Override
@@ -28,7 +29,8 @@ public class UserDto {
         return "User:\n" +
                 "ID= " + id +
                 ",\n Name= " + name +
-                ",\n Email= " + email;
+                ",\n Email= " + email +
+                ",\n Role= " + roles;
     }
 }
 

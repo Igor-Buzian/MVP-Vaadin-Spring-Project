@@ -24,6 +24,7 @@ public class PopupView implements UserView {
             builder.append("ID: ").append(user.getId())
                     .append(",\n Name: ").append(user.getName())
                     .append(",\n Email: ").append(user.getEmail())
+                    .append(",\n Role: ").append("n/a")
                     .append("\n");
         }
         Notification.show("All Users", 3000, Notification.Position.BOTTOM_CENTER);

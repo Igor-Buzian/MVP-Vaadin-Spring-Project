@@ -1,8 +1,7 @@
-package com.example.frontend.ui;
+package com.example.frontend.ui.admin;
 
 import com.example.frontend.view.PopupView;
 import com.example.share.interfaces.dto.UserDto;
-import com.vaadin.flow.component.UI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.ParameterizedTypeReference;
@@ -12,10 +11,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 @Service
 @PropertySource("classpath:MyFrontendApp.properties")

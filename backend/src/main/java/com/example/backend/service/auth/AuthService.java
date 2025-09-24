@@ -70,16 +70,16 @@ public class AuthService {
 
         //if(loginAttemptService.isBloked(ip)) return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location","/login?error=ip_banned").build();
 
-        if(!loginAttemptService.validateCaptcha(ip, jwtRequest.getCaptchaResponse()))   return  ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location","http://localhost:8081/login?error=ip_banned").build();
+        if(!loginAttemptService.validateCaptcha(ip, jwtRequest.getCaptchaResponse()))   return  ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location","http://localhost:8080/login?error=ip_banned").build();
 
         if(!passwordEncoder.matches(jwtRequest.getPassword(), user.getPassword())){
             if(accountSecurityService.isAccountLocked(user)){
-                return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location","http://localhost:8081/login?error=account_banned").build();
+                return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location","http://localhost:8080/login?error=account_banned").build();
             }
             else {
                 accountSecurityService.IncrementFailedAttempts(user, captchaService.isCaptchaValid(jwtRequest.getCaptchaResponse()));
                 int attemptsLeft = accountSecurityService.getMax_failed_attempts() - user.getFailedAttempts();
-                return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location","http://localhost:8081/login?error=wrong&attempt="+attemptsLeft).build();
+                return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location","http://localhost:8080/login?error=wrong&attempt="+attemptsLeft).build();
             }
         }
 
@@ -98,7 +98,7 @@ public class AuthService {
         response.addCookie(cookie);
 
         HttpHeaders headers =new HttpHeaders();
-        headers.add("Location", "http://localhost:8081");
+        headers.add("Location", "http://localhost:8080");
         return  new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
 
     }
@@ -109,10 +109,10 @@ public class AuthService {
             String ip = request.getRemoteAddr();
             loginAttemptService.loginFailed(ip);
             if (loginAttemptService.isBloked(ip)) {
-                return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location", "http://localhost:8081/login?errpr=ip_banned").build();
+                return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location", "http://localhost:8080/login?errpr=ip_banned").build();
             }
             int attemptsLeft = loginAttemptService.getCount_attempts() - loginAttemptService.AttemptsCount(ip);
-            return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location", "http://localhost:8081/login?error=incorrect&attempt=" + attemptsLeft).build();
+            return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location", "http://localhost:8080/login?error=incorrect&attempt=" + attemptsLeft).build();
         }
         return null;
     }

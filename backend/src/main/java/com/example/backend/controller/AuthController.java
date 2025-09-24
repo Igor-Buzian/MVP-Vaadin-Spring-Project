@@ -24,7 +24,7 @@ public class AuthController {
      * @return A ResponseEntity containing the authentication result (e.g., JWT token) or an error.
      */
     @PostMapping
-    public ResponseEntity<?> auth(JwtRequest jwtRequest, HttpServletResponse response, HttpServletRequest request)
+    public ResponseEntity<?> auth(@RequestBody JwtRequest jwtRequest, HttpServletResponse response, HttpServletRequest request)
     {
         return authService.authUser(jwtRequest, request,response);
     }

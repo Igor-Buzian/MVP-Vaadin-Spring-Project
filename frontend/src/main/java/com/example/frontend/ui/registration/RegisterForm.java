@@ -24,7 +24,6 @@ public class RegisterForm extends VerticalLayout{
     PasswordField password = new PasswordField("Password");
     PasswordField passwordConfirm = new PasswordField("Confirm Password");
     Button registerButton = new Button("Register");
-    Button confirmButton = new Button( "Confirm");
 
     @Value("${recaptcha.site_key}")
     String recaptchaDataSiteKey;

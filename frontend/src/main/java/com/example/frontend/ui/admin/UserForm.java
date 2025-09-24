@@ -1,4 +1,4 @@
-package com.example.frontend.ui;
+package com.example.frontend.ui.admin;
 
 
 

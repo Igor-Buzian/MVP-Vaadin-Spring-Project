@@ -1,6 +1,5 @@
 package com.example.backend.controller;
 
-import com.example.backend.service.UserPresenter;
 import com.example.backend.service.auth.RegistrationService;
 import com.example.share.interfaces.dto.RegisterDtoValues;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
